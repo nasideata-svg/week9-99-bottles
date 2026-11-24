@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>99 Bottles of Beer - Week 9 Lab</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f9; color: #242b35; }
+    main { max-width: 760px; margin: 35px auto; padding: 28px; background: white; border-radius: 12px; box-shadow: 0 3px 12px #00000012; }
+    h1 { margin-top: 0; color: #203b61; }
+    p { line-height: 1.65; }
+    .verse { padding: 14px 0; border-bottom: 1px solid #e1e6ee; }
+    .verse p { margin: 5px 0; }
+    button { background: #205b9d; color: white; border: 0; padding: 11px 18px; border-radius: 6px; cursor: pointer; font-size: 15px; }
+    button:hover { background: #164576; }
+    #lyrics { margin-top: 20px; }
+    .intro { color: #526070; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>99 Bottles of Beer</h1>
+    <p class="intro">Week 9 JavaScript Loops Lab. Click the button to print all verses of the traditional song.</p>
+    <button id="showButton" type="button">Show All Lyrics</button>
+    <div id="lyrics" aria-live="polite"></div>
+  </main>
+
+  <script>
+    // Week 9 Lab: use a loop to print the lyrics from 99 down to 0.
+    function showLyrics() {
+      let output = "";
+
+      for (let bottles = 99; bottles > 0; bottles--) {
+        let currentWord = "bottles";
+        let nextWord = "bottles";
+        let nextBottles = bottles - 1;
+
+        if (bottles === 1) {
+          currentWord = "bottle";
+        }
+        if (nextBottles === 1) {
+          nextWord = "bottle";
+        }
+
+        let nextLine = nextBottles + " " + nextWord;
+        if (nextBottles === 0) {
+          nextLine = "no more bottles";
+        }
+
+        output += "<div class='verse'>";
+        output += "<p>" + bottles + " " + currentWord + " of beer on the wall, " + bottles + " " + currentWord + " of beer.</p>";
+        output += "<p>Take one down and pass it around, " + nextLine + " of beer on the wall.</p>";
+        output += "</div>";
+      }
+
+      // Final verse after all the bottles are gone.
+      output += "<div class='verse'>";
+      output += "<p>No more bottles of beer on the wall, no more bottles of beer.</p>";
+      output += "<p>Go to the store and buy some more, 99 bottles of beer on the wall.</p>";
+      output += "</div>";
+
+      document.getElementById("lyrics").innerHTML = output;
+    }
+
+    document.getElementById("showButton").addEventListener("click", showLyrics);
+  </script>
+</body>
+</html>
